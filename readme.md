@@ -24,9 +24,6 @@ To start the client, enter the command:
 
 ```bash
 python3 sandbox_client.py command [option=value]
-check_local_file
- --filename="val"
- --signature="val"
 ```
 
 Commands:
