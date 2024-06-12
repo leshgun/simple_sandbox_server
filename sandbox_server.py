@@ -96,7 +96,7 @@ class SandboxServer:
         if command not in allowed_commands:
             self.logger.warning("Unrecognized command: %s", command)
             return "Unrecognized command..."
-        self.logger.info('Run "%s" script', command)
+        self.logger.debug('Run "%s" script', command)
         response = (allowed_commands[command])(**args) or "Got it!"
         return response
 
@@ -111,9 +111,9 @@ class SandboxServer:
         if not text:
             return "File does not exists or is empty."
         shifts = [s.start() for s in finditer(signature, text)]
-        self.logger.info("Found shifts in file: %s", filepath)
-        self.logger.info("--- Signature: %s", signature)
-        self.logger.info("--- Shifts: %s", shifts)
+        self.logger.debug("Found shifts in file: %s", filepath)
+        self.logger.debug("--- Signature: %s", signature)
+        self.logger.debug("--- Shifts: %s", shifts)
         return str(shifts)
 
     def quarantine_local_file(self, filepath:str=None):
@@ -214,6 +214,7 @@ def main():
             logger.info("Got input on server: %s", inp)
         except KeyboardInterrupt:
             logger.info("Keyboard interrupt")
+            server.stop()
             sys_exit(0)
 
 
