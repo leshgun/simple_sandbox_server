@@ -43,7 +43,7 @@ Options:
 
 Examples:
 
-```
+```bash
 python3 check_local_file --filename="val" --signature="val"
 python3 quarantine_local_file --filename=val
 ```
