@@ -44,7 +44,15 @@ Options:
 | `--signature`    | signature (string) to find in file          |
 | `-?, -h, --help` | print this help                             |
 
+## Tests
+
+To run the tests, to make sure that the server is working correctly, you need to run the command:
+
+```bash
+python test_sandbox_server.py -v
+```
+
 ## Todo
 
-- [ ] Unit test to check new features in CI/CD
-- [ ] Code rewiev
+- [X] Unit test to check new features in CI/CD
+- [X] Code review

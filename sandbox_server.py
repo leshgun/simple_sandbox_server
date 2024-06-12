@@ -29,13 +29,13 @@ class SandboxServer:
         threads_num: int = DEFAULT_THREADS_NUM,
         bind_ip: str = "127.0.0.1",
         bind_port: int = 15000,
-        logger: logging.Logger = lambda: None,
+        logger: logging.Logger=None,
         quarantine_directory: str = "./quarantine_files",
     ) -> None:
         self.threads_num = threads_num or self.DEFAULT_THREADS_NUM
         self.bind_ip = bind_ip
         self.bind_port = bind_port
-        self.logger = logger
+        self.logger = logger or logging.getLogger()
         self.quarantine_directory = quarantine_directory
         self.server = socket(AF_INET, SOCK_STREAM)
         self.server.bind((self.bind_ip, self.bind_port))
@@ -43,9 +43,9 @@ class SandboxServer:
             self.threads_num = self.DEFAULT_THREADS_NUM
             self.logger.warning("Threads number must be greater than 0")
         self.logger.info("Server has been initialized.")
-        self.logger.info(f"--- Ip: {self.bind_ip}")
-        self.logger.info(f"--- Port: {self.bind_port}")
-        self.logger.info(f"--- Threads num: {self.threads_num}")
+        self.logger.info('--- Ip: %s', self.bind_ip)
+        self.logger.info('--- Port: %s', self.bind_port)
+        self.logger.info('--- Threads num: %s', self.threads_num)
 
     def start(self) -> None:
         """
@@ -56,7 +56,7 @@ class SandboxServer:
         while True:
             try:
                 client, addr = self.server.accept()
-                self.logger.info(f"Accepted connection from: {addr[0]}:{addr[1]}")
+                self.logger.info('Accepted connection from: %s:%s', *addr)
                 client_handler = Thread(target=self.handler, args=(client,))
                 client_handler.start()
             except KeyboardInterrupt:
@@ -96,16 +96,14 @@ class SandboxServer:
         if command not in allowed_commands:
             self.logger.warning("Unrecognized command: %s", command)
             return "Unrecognized command..."
-        self.logger.info(f'Run "{command}" script.')
+        self.logger.info('Run "%s" script', command)
         response = (allowed_commands[command])(**args) or "Got it!"
         return response
 
-    def check_local_file(self, **kwargs) -> str:
+    def check_local_file(self, filepath:str=None, signature:str=None) -> str:
         """
         Check file for the viruses or vulnerabilities
         """
-        filepath = kwargs.get("filepath", None)
-        signature = kwargs.get("signature", None)
         if not (filepath and signature):
             self.logger.warning("Not enought arguments...")
             return "Not enought arguments..."
@@ -118,11 +116,10 @@ class SandboxServer:
         self.logger.info("--- Shifts: %s", shifts)
         return str(shifts)
 
-    def quarantine_local_file(self, **kwargs):
+    def quarantine_local_file(self, filepath:str=None):
         """
         Send file to quarantine
         """
-        filepath = kwargs.get("filepath", None)
         if not filepath:
             self.logger.warning("Not enought arguments...")
             return "Not enought arguments..."
