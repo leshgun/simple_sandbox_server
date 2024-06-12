@@ -12,11 +12,11 @@ python3 sandbox_server.py [option=value]
 
 Options:
 
-| Option               | Description                                                                                     |
-| -------------------- | ----------------------------------------------------------------------------------------------- |
-| `--threads`        | number of logial threads (is equivalent to the number ofsimultaneous connections to the server) |
-| `--quarantine-dir` | path where the quarantine files will be stored                                                  |
-| `-?, -h, --help`   | print help                                                                                      |
+| Option               | Description                                                                                      |
+| -------------------- | ------------------------------------------------------------------------------------------------ |
+| `--threads`        | number of logial threads (is equivalent to the number of simultaneous connections to the server) |
+| `--quarantine-dir` | path where the quarantine files will be stored                                                   |
+| `-?, -h, --help`   | print help                                                                                       |
 
 ## Statring the client
 
