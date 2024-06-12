@@ -28,10 +28,10 @@ python3 sandbox_client.py command [option=value]
 
 Commands:
 
-| Command                                               | Description                                     | Result                                                            |
-| ----------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------- |
-| check_local_file --filename="val" --signature="val" | Check local file `filename` on `signature` | An array of signature shift positions                             |
-| quarantine_local_file--filename="val"                 | Move file `filename` to quarantine directory | Moves the specified file to thequarantine directory of the server |
+| Command               | Description                                     | Result                                                            |
+| --------------------- | ----------------------------------------------- | ----------------------------------------------------------------- |
+| check_local_file      | Check local file `filename` on `signature` | An array of signature shift positions                             |
+| quarantine_local_file | Move file `filename` to quarantine directory | Moves the specified file to thequarantine directory of the server |
 
 Options:
 
@@ -40,6 +40,13 @@ Options:
 | `--filename`     | full or relative path to file with filename |
 | `--signature`    | signature (string) to find in file          |
 | `-?, -h, --help` | print this help                             |
+
+Examples:
+
+```
+python3 check_local_file --filename="val" --signature="val"
+python3 quarantine_local_file --filename=val
+```
 
 ## Tests
 
